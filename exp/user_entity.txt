@@ -1,0 +1,34 @@
+# User Entity Class Explanation
+
+This file defines the `User` entity class, which is the core model for user accounts in the Finwise application. Let me break down its key components:
+
+## Class Structure
+- This is a JPA entity mapped to a `users` table in the database
+- Uses Lombok annotations (`@Data`, `@Builder`, etc.) to reduce boilerplate code
+- Includes JPA auditing with `@EntityListeners` to automatically track creation and modification times
+
+## Key Fields
+- `id`: Primary key with auto-increment
+- `email`: Unique identifier for users (used for login)
+- `password`: For authentication (should be encrypted)
+- `firstName` and `lastName`: Basic profile information
+- `dateOfBirth` and `phoneNumber`: Additional user details
+- `createdDate`: When the account was created (auto-populated)
+- `lastLoginDate`: Tracks last successful login
+- `status`: Account status (ACTIVE, INACTIVE, SUSPENDED) with ACTIVE as default
+- `preferredCurrency`: Default is "INR" for Indian Rupees
+- `timeZone`: Default is "Asia/Kolkata" for Indian time zone
+
+## Relationships
+- `roles`: Many-to-many relationship with user roles (using `@ElementCollection`)
+- `accounts`: One-to-many relationship with financial accounts
+
+## Status Enum
+The highlighted `status` field uses the inner enum `UserStatus` which defines three possible states:
+- `ACTIVE`: Normal operational account
+- `INACTIVE`: Account that has been voluntarily deactivated
+- `SUSPENDED`: Account that has been administratively suspended
+
+The status field is stored as a STRING in the database (due to `@Enumerated(EnumType.STRING)`) rather than a numeric value, making the database more readable.
+
+This entity forms the foundation for user management, authentication, and authorization in the Finwise application.

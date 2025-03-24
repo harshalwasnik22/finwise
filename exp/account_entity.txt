@@ -1,0 +1,42 @@
+# Account.java Explanation
+
+This file defines the `Account` entity class, which represents financial accounts in the Finwise application. Let me break it down:
+
+## Class Purpose
+The `Account` class maps to the `accounts` table in the database and represents different types of financial accounts a user might have (savings accounts, credit cards, investments, etc.).
+
+## Key Annotations
+- **`@Entity`**: Marks this class as a JPA entity to be persisted in the database
+- **`@Table(name = "accounts")`**: Maps to the "accounts" table in the database
+- **Lombok annotations**:
+  - `@Data`: Generates getters, setters, equals/hashCode, and toString methods
+  - `@Builder`: Enables the builder pattern for creating Account instances
+  - `@NoArgsConstructor`/`@AllArgsConstructor`: Generates constructors
+- **`@EntityListeners`**: Enables automatic date tracking for creation/modification
+
+## Important Fields
+1. **`id`**: Primary key with auto-increment
+2. **`user`**: Many-to-one relationship with the User entity (each account belongs to one user)
+3. **`accountName`**: Required name of the account (e.g., "HDFC Savings")
+4. **`accountType`**: Type of account (from the AccountType enum)
+5. **`institution`**: Financial institution (e.g., "HDFC Bank")
+6. **`currentBalance`**: Current balance with default of 0
+7. **`availableBalance`**: Available balance (may differ from current for credit cards)
+8. **`accountNumber`**: Account number at the institution
+9. **`lastUpdated`**, **`active`**, **`notes`**: Additional metadata
+10. **`createdDate`**, **`modifiedDate`**: Audit fields automatically managed
+
+## Relationships
+- **User relationship**: `@ManyToOne` - Many accounts can belong to one user
+- **Transaction relationship**: `@OneToMany` - One account can have many transactions
+  - `cascade = CascadeType.ALL` means operations on Account cascade to related Transactions
+  - `orphanRemoval = true` means transactions removed from the collection will be deleted
+
+## India-Specific Account Types
+The `AccountType` enum includes standard types like SAVINGS and CREDIT_CARD, but also India-specific investment vehicles:
+- **FD**: Fixed Deposit
+- **PPF**: Public Provident Fund
+- **EPF**: Employee Provident Fund
+- **NPS**: National Pension System
+
+This entity forms a core part of the financial data model, connecting users to their transactions and providing the structure to track various financial accounts in a way that's customized for Indian users.

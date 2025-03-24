@@ -1,0 +1,43 @@
+# Transaction Model Explanation
+
+## Overview
+The Transaction class is a core data model in the FinWise application that represents financial transactions. It's implemented as a JPA Entity that maps to the "transactions" table in the database.
+
+## Technical Implementation
+- Uses JPA (Jakarta Persistence API) for ORM (Object-Relational Mapping)
+- Leverages Lombok annotations to reduce boilerplate code (@Data, @Builder, etc.)
+- Implements auditing with EntityListeners to track creation/modification timestamps
+- Uses proper relationships with other entities (Account, Category)
+
+## Key Fields
+1. `id`: Primary key with auto-generated value
+2. `account`: The financial account associated with this transaction (Many-to-one)
+3. `transactionDate`: Date and time when the transaction occurred
+4. `amount`: Monetary value of the transaction (using BigDecimal for precision)
+5. `description`: Text description of the transaction
+6. `merchantName`: Name of the merchant or vendor
+7. `category`: Financial category for the transaction (Many-to-one)
+8. `reconciled`: Boolean flag indicating if the transaction has been verified/reconciled
+9. `transactionType`: Enum with three possible values:
+   - EXPENSE: Money going out
+   - INCOME: Money coming in
+   - TRANSFER: Money moving between accounts
+10. `notes`: Additional free-form text notes about the transaction
+11. `createdDate`: Automatically tracked timestamp of when the record was created
+12. `modifiedDate`: Automatically updated timestamp of when the record was last modified
+13. `attachments`: Associated files/receipts (One-to-many relationship)
+
+## Database Relationships
+- Each transaction belongs to one Account
+- Each transaction belongs to one Category (optional)
+- A transaction can have multiple attachments
+
+## Usage in the Application
+This model supports core functionality including:
+- Recording all financial activities
+- Tracking expenses and income
+- Categorizing spending for budget analysis
+- Attaching receipts and documentation
+- Supporting reporting and analytical features
+
+The Transaction entity is central to the application's ability to track financial activity and provide meaningful insights into spending patterns and financial health.
