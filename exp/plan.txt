@@ -1,4 +1,4 @@
-# Project Title: "FinTrack Pro: A Scalable Personal Finance Management Platform"
+# Project Title: "FinWise: A Scalable Personal Finance Management Platform"
 
 ## Problem Statement:
 Many individuals struggle with tracking finances, budgeting effectively, and gaining actionable insights from their financial data. Existing solutions often lack comprehensive features, real-time analytics, proper security, or scalability needed for growing user bases. FinTrack Pro aims to provide a secure, scalable, and feature-rich platform for comprehensive personal financial management.
