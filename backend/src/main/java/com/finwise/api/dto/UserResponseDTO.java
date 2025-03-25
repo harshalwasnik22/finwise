@@ -1,11 +1,16 @@
 package com.finwise.api.dto;
-
 public class UserResponseDTO {
     private Long id;
-    private String name;
+    private String fullName;
     private String email;
 
-    // Getters and Setters
+    public UserResponseDTO(Long id, String fullName, String email) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+    }
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -14,12 +19,12 @@ public class UserResponseDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
